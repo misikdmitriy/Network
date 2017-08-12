@@ -1,11 +1,13 @@
-﻿using Network.Business.Commands;
+﻿using System.Linq;
+using Network.Business.Commands;
+using Network.Business.Services.Interfaces;
 using Network.Domain.Entities;
 
 namespace Network.Business.Services
 {
-    public class CommandCreator
+    public class CommandCreator : ICommandCreator
     {
-        private CommandHandlerService _commandHandlerService;
+        private readonly CommandHandlerService _commandHandlerService;
 
         public CommandCreator(CommandHandlerService commandHandlerService)
         {
@@ -14,18 +16,41 @@ namespace Network.Business.Services
 
         public void Accept(Domain.Entities.Network network)
         {
-            foreach (var node in network)
+            var channels = network.NodesPairs.Select(n => n.Channel);
+
+            var nodes = network.NodesPairs.Select(n => n.NodeFrom);
+            nodes = nodes.Union(network.NodesPairs.Select(n => n.NodeTo));
+            nodes = nodes.Distinct();
+
+            foreach (var node in nodes)
             {
-                node.MessagesBuffer.OnMessageAdd += added => OnAddMessage(node, added);
+                node.MessagesBuffer.OnMessageAdd += added => OnAddMessageToNode(node, added);
+            }
+
+            foreach (var channel in channels)
+            {
+                channel.MessagesBuffer.OnMessageAdd += added => OnAddMessageToChannel(channel, added);
             }
         }
 
-        public void OnAddMessage(Node node, Message message)
+        private void OnAddMessageToChannel(Channel channel, Message added)
         {
-            var command = new AddMessageToNodeCommand(message, node);
+            var command = new AddMessageToChannel(channel, added);
 
+            InvokeCommand(command);
+        }
+
+        private void OnAddMessageToNode(Node node, Message added)
+        {
+            var command = new AddMessageToNodeCommand(added, node);
+
+            InvokeCommand(command);
+        }
+
+        private void InvokeCommand(Command command)
+        {
             _commandHandlerService.GetType()
-                .GetMethod("Handle" + typeof(AddMessageToNodeCommand).Name)
+                .GetMethod("Handle" + command.GetType().Name)
                 .Invoke(_commandHandlerService, new object[] { command });
         }
     }

@@ -5,14 +5,19 @@ using Network.Domain.Entities.Interfaces;
 
 namespace Network.Domain.Entities
 {
-    public class OneWayChannel : IIdentifiable, IChannel
+    public class Channel : IIdentifiable, IEnumerable<Message>
     {
         public Guid Id { get; }
         public IMessagesBuffer MessagesBuffer { get; set; }
+        public bool IsBusy => MessagesBuffer.Count >= _messagesCount;
 
-        public OneWayChannel()
+        private readonly int _messagesCount;
+
+        protected Channel(int messagesCount)
         {
-            MessagesBuffer = new LimitedMessageBuffer(1);
+            Id = Guid.NewGuid();
+            _messagesCount = messagesCount;
+            MessagesBuffer = new LimitedMessagesesBuffer(messagesCount);
         }
 
         public IEnumerator<Message> GetEnumerator()

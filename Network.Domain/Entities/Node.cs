@@ -12,7 +12,7 @@ namespace Network.Domain.Entities
         public Node()
         {
             Id = Guid.NewGuid();
-            MessagesBuffer = new UnlimitedMessageBuffer();
+            MessagesBuffer = new UnlimitedMessagesBuffer();
         }
     }
 }

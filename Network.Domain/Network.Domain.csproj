@@ -40,16 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Interfaces\IChannel.cs" />
-    <Compile Include="Entities\LimitedMessageBuffer.cs" />
-    <Compile Include="Entities\OneWayChannel.cs" />
+    <Compile Include="Entities\Channel.cs" />
+    <Compile Include="Entities\LimitedMessagesesBuffer.cs" />
+    <Compile Include="Entities\NodesPair.cs" />
     <Compile Include="Entities\Interfaces\IMessagesBuffer.cs" />
     <Compile Include="Entities\Interfaces\IIdentifiable.cs" />
     <Compile Include="Entities\Message.cs" />
-    <Compile Include="Entities\UnlimitedMessageBuffer.cs" />
+    <Compile Include="Entities\UnlimitedMessagesBuffer.cs" />
     <Compile Include="Entities\Network.cs" />
     <Compile Include="Entities\Node.cs" />
-    <Compile Include="Entities\OneWayChannelMessageBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

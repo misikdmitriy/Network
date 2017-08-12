@@ -4,13 +4,13 @@ using Network.Domain.Entities.Interfaces;
 
 namespace Network.Domain.Entities
 {
-    public class UnlimitedMessageBuffer : IMessagesBuffer
+    public class UnlimitedMessagesBuffer : IMessagesBuffer
     {
-        private readonly List<Message> Messages;
+        private readonly List<Message> _messages;
 
-        public UnlimitedMessageBuffer()
+        public UnlimitedMessagesBuffer()
         {
-            Messages = new List<Message>();
+            _messages = new List<Message>();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -20,65 +20,65 @@ namespace Network.Domain.Entities
 
         public IEnumerator<Message> GetEnumerator()
         {
-            return Messages.GetEnumerator();
+            return _messages.GetEnumerator();
         }
 
         public virtual void Add(Message item)
         {
-            Messages.Add(item);
+            _messages.Add(item);
             OnMessageAdd?.Invoke(item);
         }
 
         public void Clear()
         {
-            Messages.Clear();
+            _messages.Clear();
             OnBufferCleared?.Invoke();
         }
 
         public bool Contains(Message item)
         {
-            return Messages.Contains(item);
+            return _messages.Contains(item);
         }
 
         public void CopyTo(Message[] array, int arrayIndex)
         {
-            Messages.CopyTo(array, arrayIndex);
+            _messages.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(Message item)
         {
-            var result = Messages.Remove(item);
+            var result = _messages.Remove(item);
             OnMessageRemoved?.Invoke(item);
             return result;
         }
 
-        public int Count => Messages.Count;
+        public int Count => _messages.Count;
         public bool IsReadOnly => false;
         public int IndexOf(Message item)
         {
-            return Messages.IndexOf(item);
+            return _messages.IndexOf(item);
         }
 
         public virtual void Insert(int index, Message item)
         {
-            Messages.Insert(index, item);
+            _messages.Insert(index, item);
             OnMessageAdd?.Invoke(item);
         }
 
         public void RemoveAt(int index)
         {
-            var removed = Messages[index];
-            Messages.RemoveAt(index);
+            var removed = _messages[index];
+            _messages.RemoveAt(index);
             OnMessageRemoved?.Invoke(removed);
         }
 
         public Message this[int index]
         {
-            get { return Messages[index]; }
+            get { return _messages[index]; }
             set
             {
-                var replaced = Messages[index];
-                Messages[index] = value;
+                var replaced = _messages[index];
+                _messages[index] = value;
 
                 OnMessageRemoved?.Invoke(replaced);
                 OnMessageAdd?.Invoke(value);

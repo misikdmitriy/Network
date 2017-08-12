@@ -1,10 +1,10 @@
 ﻿namespace Network.Domain.Entities
 {
-    public class LimitedMessageBuffer : UnlimitedMessageBuffer
+    public class LimitedMessagesesBuffer : UnlimitedMessagesBuffer
     {
         private long Size { get; }
 
-        public LimitedMessageBuffer(long size)
+        public LimitedMessagesesBuffer(long size)
         {
             Size = size;
         }

@@ -1,17 +1,21 @@
-﻿using Network.Business.Commands;
+﻿using System;
+using Network.Business.Commands;
 
 namespace Network.Business.Services
 {
     public class CommandHandlerService
     {
-        public void HandleAddMessageToNodeCommand(Command command)
+        public void HandleAddMessageToNodeCommand(AddMessageToNodeCommand command)
         {
-            var addMessageCommand = (AddMessageToNodeCommand)command;
-
-            if (addMessageCommand.Node.Id == addMessageCommand.Message.Receiver.Id)
+            if (command.Node.Id == command.Message.Receiver.Id)
             {
                 // TODO: notify
             }
+        }
+
+        public void HandleAddMessageToChannelCommand(AddMessageToChannel command)
+        {
+            throw new NotImplementedException();
         }
     }
 }
