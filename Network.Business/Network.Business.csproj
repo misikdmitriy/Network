@@ -43,6 +43,7 @@
     <Compile Include="Commands\AddMessageToChannel.cs" />
     <Compile Include="Commands\AddMessageToNodeCommand.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Postprocessors\MessagePostrpocessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommandCreator.cs" />
     <Compile Include="Services\CommandHandlerService.cs" />

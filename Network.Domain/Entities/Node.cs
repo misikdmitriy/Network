@@ -7,12 +7,14 @@ namespace Network.Domain.Entities
     {
         public Guid Id { get; }
         public IMessagesBuffer MessagesBuffer { get; }
+        public IMessagesBuffer ReceivedMessages { get; }
         public bool IsUnactive { get; set; }
 
         public Node()
         {
             Id = Guid.NewGuid();
             MessagesBuffer = new UnlimitedMessagesBuffer();
+            ReceivedMessages = new UnlimitedMessagesBuffer();
         }
     }
 }

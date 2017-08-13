@@ -9,7 +9,8 @@ namespace Network.Business.Services
         {
             if (command.Node.Id == command.Message.Receiver.Id)
             {
-                // TODO: notify
+                command.Node.MessagesBuffer.Remove(command.Message);
+                command.Node.ReceivedMessages.Add(command.Message);
             }
         }
 
