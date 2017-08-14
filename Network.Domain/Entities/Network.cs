@@ -7,7 +7,7 @@ namespace Network.Domain.Entities
     public class Network : IIdentifiable
     {
         public Guid Id { get; }
-        public IEnumerable<NodesPair> NodesPairs { get; }
+        public IList<NodesPair> NodesPairs { get; }
 
         public Network()
         {
