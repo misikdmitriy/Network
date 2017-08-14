@@ -9,6 +9,8 @@ namespace Network.Domain.Entities.Interfaces
 
     public interface IMessagesBuffer : IList<Message>
     {
+        bool IsFilled { get; }
+
         event MessageAddedHandler OnMessageAdd;
         event MessageRemovedHandler OnMessageRemoved;
         event BufferCleared OnBufferCleared;

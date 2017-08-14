@@ -1,0 +1,12 @@
+language: csharp
+solution: Network.sln
+script:
+  - xbuild /p:Configuration=Release Network.sln
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
+  - nuget restore Network.sln
+after_script:
+  - nunit-console Network.Tests/bin/Release/Network.Tests.dll
+mono:
+  - latest

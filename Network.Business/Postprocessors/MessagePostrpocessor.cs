@@ -15,9 +15,7 @@ namespace Network.Business.Postprocessors
 
         public void Accept(Domain.Entities.Network network)
         {
-            var nodes = network.NodesPairs.Select(n => n.NodeFrom);
-            nodes = nodes.Union(network.NodesPairs.Select(n => n.NodeTo));
-            nodes = nodes.Distinct();
+            var nodes = network.NodesPairs.SelectMany(n => n.Nodes).Distinct();
 
             foreach (var node in nodes)
             {

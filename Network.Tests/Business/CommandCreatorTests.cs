@@ -1,7 +1,8 @@
-﻿using Moq;
+﻿using System.Linq;
+using Moq;
 using Network.Business.Services;
 using Network.Business.Services.Interfaces;
-using Network.Domain.Entities;
+using Network.Tests.Misc;
 using NUnit.Framework;
 
 namespace Network.Tests.Business
@@ -22,18 +23,23 @@ namespace Network.Tests.Business
 
             _commandCreator = new CommandCreator(_commandHandlerServiceMock.Object);
 
-            _network = new Network();
-
-            _network.NodesPairs.Add(new NodesPair
-            {
-                Channel = { }
-            });
+            _network = NetworkBuilder.Build();
         }
 
         [Test]
         public void AcceptShouldAddEventHandlers()
         {
-            Assert.Fail();
+            // Arrange
+            // Act
+            _commandCreator.Accept(_network);
+
+            // Assert
+            foreach (var node in _network.NodesPairs.SelectMany(n => n.Nodes))
+            {
+                // ToDo: test that event has subscribers
+                //NetworkBuilder.MessagesBufferMock.Verify(m => m.OnMessageAdd);
+                Assert.Fail();
+            }
         }
     }
 }

@@ -9,15 +9,24 @@ namespace Network.Domain.Entities
     {
         public Guid Id { get; }
         public IMessagesBuffer MessagesBuffer { get; set; }
-        public bool IsBusy => MessagesBuffer.Count >= _messagesCount;
+        public bool IsBusy => MessagesBuffer.IsFilled;
 
-        private readonly int _messagesCount;
-
-        protected Channel(int messagesCount)
+        public Channel()
         {
             Id = Guid.NewGuid();
-            _messagesCount = messagesCount;
-            MessagesBuffer = new LimitedMessagesesBuffer(messagesCount);
+            MessagesBuffer = new UnlimitedMessagesBuffer();
+        }
+
+        public Channel(int messagesCount)
+        {
+            Id = Guid.NewGuid();
+            MessagesBuffer = new LimitedMessagesBuffer(messagesCount);
+        }
+
+        internal Channel(IMessagesBuffer messagesBuffer)
+        {
+            Id = Guid.NewGuid();
+            MessagesBuffer = messagesBuffer;
         }
 
         public IEnumerator<Message> GetEnumerator()

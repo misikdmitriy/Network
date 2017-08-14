@@ -1,17 +1,18 @@
 ﻿namespace Network.Domain.Entities
 {
-    public class LimitedMessagesesBuffer : UnlimitedMessagesBuffer
+    public class LimitedMessagesBuffer : UnlimitedMessagesBuffer
     {
         private long Size { get; }
+        public override bool IsFilled => Count >= Size;
 
-        public LimitedMessagesesBuffer(long size)
+        public LimitedMessagesBuffer(long size)
         {
             Size = size;
         }
 
         public override void Add(Message item)
         {
-            if (Count >= Size)
+            if (IsFilled)
             {
                 return;
             }
@@ -21,7 +22,7 @@
 
         public override void Insert(int index, Message item)
         {
-            if (Count >= Size)
+            if (IsFilled)
             {
                 return;
             }

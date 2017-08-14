@@ -6,6 +6,7 @@ namespace Network.Domain.Entities
 {
     public class UnlimitedMessagesBuffer : IMessagesBuffer
     {
+        public virtual bool IsFilled => false;
         private readonly List<Message> _messages;
 
         public UnlimitedMessagesBuffer()

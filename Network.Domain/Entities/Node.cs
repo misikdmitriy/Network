@@ -16,5 +16,12 @@ namespace Network.Domain.Entities
             MessagesBuffer = new UnlimitedMessagesBuffer();
             ReceivedMessages = new UnlimitedMessagesBuffer();
         }
+
+        internal Node(IMessagesBuffer messagesBuffer, IMessagesBuffer receivedMessages)
+        {
+            Id = Guid.NewGuid();
+            MessagesBuffer = messagesBuffer;
+            ReceivedMessages = receivedMessages;
+        }
     }
 }
