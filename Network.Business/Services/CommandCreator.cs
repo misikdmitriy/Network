@@ -5,19 +5,20 @@ using Network.Domain.Entities;
 
 namespace Network.Business.Services
 {
+    using Network = Domain.Entities.Network;
+
     public class CommandCreator : ICommandCreator
     {
-        private readonly CommandHandlerService _commandHandlerService;
+        private readonly ICommandHandlerService _commandHandlerService;
 
-        public CommandCreator(CommandHandlerService commandHandlerService)
+        public CommandCreator(ICommandHandlerService commandHandlerService)
         {
             _commandHandlerService = commandHandlerService;
         }
 
-        public void Accept(Domain.Entities.Network network)
+        public void Accept(Network network)
         {
             var channels = network.NodesPairs.Select(n => n.Channel);
-
             var nodes = network.NodesPairs.SelectMany(n => n.Nodes).Distinct();
 
             foreach (var node in nodes)
@@ -47,9 +48,10 @@ namespace Network.Business.Services
 
         private void InvokeCommand(Command command)
         {
-            _commandHandlerService.GetType()
-                .GetMethod("Handle" + command.GetType().Name)
-                .Invoke(_commandHandlerService, new object[] { command });
+            var method = _commandHandlerService.GetType()
+                .GetMethod("Handle" + command.GetType().Name);
+
+            method.Invoke(_commandHandlerService, new object[] { command });
         }
     }
 }

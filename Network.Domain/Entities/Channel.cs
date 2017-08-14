@@ -14,13 +14,13 @@ namespace Network.Domain.Entities
         public Channel()
         {
             Id = Guid.NewGuid();
-            MessagesBuffer = new UnlimitedMessagesBuffer();
+            MessagesBuffer = new MessagesBuffer();
         }
 
         public Channel(int messagesCount)
         {
             Id = Guid.NewGuid();
-            MessagesBuffer = new LimitedMessagesBuffer(messagesCount);
+            MessagesBuffer = new MessagesBuffer(messagesCount);
         }
 
         internal Channel(IMessagesBuffer messagesBuffer)

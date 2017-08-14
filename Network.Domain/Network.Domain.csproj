@@ -41,12 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Channel.cs" />
-    <Compile Include="Entities\LimitedMessagesBuffer.cs" />
     <Compile Include="Entities\NodesPair.cs" />
     <Compile Include="Entities\Interfaces\IMessagesBuffer.cs" />
     <Compile Include="Entities\Interfaces\IIdentifiable.cs" />
     <Compile Include="Entities\Message.cs" />
-    <Compile Include="Entities\UnlimitedMessagesBuffer.cs" />
+    <Compile Include="Entities\MessagesBuffer.cs" />
     <Compile Include="Entities\Network.cs" />
     <Compile Include="Entities\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

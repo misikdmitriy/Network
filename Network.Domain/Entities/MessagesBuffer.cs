@@ -4,13 +4,21 @@ using Network.Domain.Entities.Interfaces;
 
 namespace Network.Domain.Entities
 {
-    public class UnlimitedMessagesBuffer : IMessagesBuffer
+    public class MessagesBuffer : IMessagesBuffer
     {
-        public virtual bool IsFilled => false;
+        public virtual bool IsFilled => Count >= Size;
+        private int Size { get; }
         private readonly List<Message> _messages;
 
-        public UnlimitedMessagesBuffer()
+        public MessagesBuffer(int size)
         {
+            Size = size;
+            _messages = new List<Message>();
+        }
+
+        public MessagesBuffer()
+        {
+            Size = int.MaxValue;
             _messages = new List<Message>();
         }
 
@@ -26,6 +34,11 @@ namespace Network.Domain.Entities
 
         public virtual void Add(Message item)
         {
+            if (IsFilled)
+            {
+                return;
+            }
+
             _messages.Add(item);
             OnMessageAdd?.Invoke(item);
         }
@@ -62,6 +75,11 @@ namespace Network.Domain.Entities
 
         public virtual void Insert(int index, Message item)
         {
+            if (IsFilled)
+            {
+                return;
+            }
+
             _messages.Insert(index, item);
             OnMessageAdd?.Invoke(item);
         }

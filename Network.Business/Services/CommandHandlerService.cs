@@ -1,9 +1,10 @@
 ﻿using System;
 using Network.Business.Commands;
+using Network.Business.Services.Interfaces;
 
 namespace Network.Business.Services
 {
-    public class CommandHandlerService
+    public class CommandHandlerService : ICommandHandlerService
     {
         public void HandleAddMessageToNodeCommand(AddMessageToNodeCommand command)
         {

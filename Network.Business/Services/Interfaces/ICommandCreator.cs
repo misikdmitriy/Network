@@ -1,7 +1,9 @@
 ﻿namespace Network.Business.Services.Interfaces
 {
+    using Network = Domain.Entities.Network;
+
     public interface ICommandCreator
     {
-        void Accept(Domain.Entities.Network network);
+        void Accept(Network network);
     }
 }

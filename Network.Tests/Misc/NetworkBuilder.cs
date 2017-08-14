@@ -8,12 +8,16 @@ namespace Network.Tests.Misc
 
     public class NetworkBuilder
     {
-        public static Mock<IMessagesBuffer> MessagesBufferMock { get; }
-        private static IMessagesBuffer MessagesBuffer => MessagesBufferMock.Object;
+        public static Mock<IMessagesBuffer> NodeMessagesBufferMock { get; }
+        private static IMessagesBuffer NodeMessagesBuffer => NodeMessagesBufferMock.Object;
+
+        public static Mock<IMessagesBuffer> ChannelMessagesBufferMock { get; }
+        private static IMessagesBuffer ChannelMessagesBuffer => ChannelMessagesBufferMock.Object;
 
         static NetworkBuilder()
         {
-            MessagesBufferMock = new Mock<IMessagesBuffer>();
+            NodeMessagesBufferMock = new Mock<IMessagesBuffer>();
+            ChannelMessagesBufferMock = new Mock<IMessagesBuffer>();
         }
 
         public static Network Build()
@@ -22,15 +26,15 @@ namespace Network.Tests.Misc
 
             var nodes = new[]
             {
-                new Node(MessagesBuffer, MessagesBuffer),
-                new Node(MessagesBuffer, MessagesBuffer),
-                new Node(MessagesBuffer, MessagesBuffer),
+                new Node(NodeMessagesBuffer, NodeMessagesBuffer),
+                new Node(NodeMessagesBuffer, NodeMessagesBuffer),
+                new Node(NodeMessagesBuffer, NodeMessagesBuffer),
             };
 
             var channels = new[]
             {
-                new Channel(MessagesBuffer),
-                new Channel(MessagesBuffer)
+                new Channel(ChannelMessagesBuffer),
+                new Channel(ChannelMessagesBuffer)
             };
 
             network.NodesPairs.Add(new NodesPair(channels[0], nodes[0], nodes[1]));

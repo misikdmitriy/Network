@@ -13,8 +13,8 @@ namespace Network.Domain.Entities
         public Node()
         {
             Id = Guid.NewGuid();
-            MessagesBuffer = new UnlimitedMessagesBuffer();
-            ReceivedMessages = new UnlimitedMessagesBuffer();
+            MessagesBuffer = new MessagesBuffer();
+            ReceivedMessages = new MessagesBuffer();
         }
 
         internal Node(IMessagesBuffer messagesBuffer, IMessagesBuffer receivedMessages)

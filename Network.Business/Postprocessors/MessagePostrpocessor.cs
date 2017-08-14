@@ -4,16 +4,18 @@ using Network.Domain.Entities.Interfaces;
 
 namespace Network.Business.Postprocessors
 {
+    using Network = Domain.Entities.Network;
+
     public class MessagePostrpocessor
     {
         public IMessagesBuffer MessagesBuffer { get; }
 
         public MessagePostrpocessor()
         {
-            MessagesBuffer = new UnlimitedMessagesBuffer();
+            MessagesBuffer = new MessagesBuffer();
         }
 
-        public void Accept(Domain.Entities.Network network)
+        public void Accept(Network network)
         {
             var nodes = network.NodesPairs.SelectMany(n => n.Nodes).Distinct();
 
