@@ -37,8 +37,8 @@ namespace Network.Tests.Misc
                 new Channel(ChannelMessagesBuffer)
             };
 
-            network.NodesPairs.Add(new NodesPair(channels[0], nodes[0], nodes[1]));
-            network.NodesPairs.Add(new NodesPair(channels[1], nodes[1], nodes[2]));
+            network.NodesPairs.Add(new NodesPair(nodes[0], nodes[1], channels[0]));
+            network.NodesPairs.Add(new NodesPair(nodes[1], nodes[2], channels[1]));
 
             return network;
         }

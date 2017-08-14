@@ -48,6 +48,8 @@
     <Compile Include="Entities\MessagesBuffer.cs" />
     <Compile Include="Entities\Network.cs" />
     <Compile Include="Entities\Node.cs" />
+    <Compile Include="Helpers\Interfaces\IWrapper.cs" />
+    <Compile Include="Helpers\MessageWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

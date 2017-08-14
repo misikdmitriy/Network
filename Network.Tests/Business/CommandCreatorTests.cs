@@ -41,7 +41,7 @@ namespace Network.Tests.Business
             _commandCreator.Accept(_network);
 
             // Assert
-            NetworkBuilder.NodeMessagesBufferMock.Raise(n => n.OnMessageAdd += null, new Message());
+            NetworkBuilder.NodeMessagesBufferMock.Raise(n => n.OnMessageAdd += null, Message.NullMessage);
 
             _commandHandlerServiceMock.Verify(n => n.HandleAddMessageToNodeCommand(It.IsAny<AddMessageToNodeCommand>()), Times.Exactly(nodes.Length));
         }
@@ -59,7 +59,7 @@ namespace Network.Tests.Business
             _commandCreator.Accept(_network);
 
             // Assert
-            NetworkBuilder.ChannelMessagesBufferMock.Raise(n => n.OnMessageAdd += null, new Message());
+            NetworkBuilder.ChannelMessagesBufferMock.Raise(n => n.OnMessageAdd += null, Message.NullMessage);
 
             _commandHandlerServiceMock.Verify(n => n.HandleAddMessageToNodeCommand(It.IsAny<AddMessageToNodeCommand>()), Times.Exactly(channels.Length));
         }

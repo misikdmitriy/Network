@@ -4,21 +4,40 @@ using Network.Domain.Entities.Interfaces;
 
 namespace Network.Domain.Entities
 {
+    /// <summary>
+    /// Message buffer
+    /// </summary>
     public class MessagesBuffer : IMessagesBuffer
     {
+        /// <summary>
+        /// Indicates is buffer filled
+        /// </summary>
         public virtual bool IsFilled => Count >= Size;
+        /// <summary>
+        /// Buffer size
+        /// </summary>
         private int Size { get; }
+        /// <summary>
+        /// Real buffer
+        /// </summary>
         private readonly List<Message> _messages;
 
-        public MessagesBuffer(int size)
-        {
-            Size = size;
-            _messages = new List<Message>();
-        }
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MessagesBuffer()
         {
             Size = int.MaxValue;
+            _messages = new List<Message>();
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="size">Buffer size</param>
+        public MessagesBuffer(int size)
+        {
+            Size = size;
             _messages = new List<Message>();
         }
 
