@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Entities\Channel.cs" />
     <Compile Include="Entities\LimitedMessagesBuffer.cs" />
     <Compile Include="Entities\NodesPair.cs" />
